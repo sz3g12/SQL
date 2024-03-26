@@ -1,0 +1,42 @@
+# Previous and Post – Consecutive Numbers/Days
+select 
+distinct(num) as ConsecutiveNums
+from(
+select 
+id
+, num
+, lag(num, 1) over () as prev_num
+, lead(num, 1) over () as post_num
+from logs
+) l
+where num = prev_num 
+and num = post_num
+
+# Union, group by and having
+select 
+employee_id
+,department_id 
+from employee
+group by employee_id
+having count(distinct(department_id)) =  1
+union 
+select 
+employee_id
+,department_id 
+from employee
+where primary_flag = 'Y'
+
+# Same row equal is OK
+select distinct(author_id) as id
+from Views
+where author_id = viewer_id 
+order by author_id ;
+
+# Text length function 
+select tweet_id
+from Tweets
+where length(content) > 15
+
+
+
+
